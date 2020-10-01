@@ -20,7 +20,7 @@ ALL_NET_HTTP_ERRORS = [
 ]
 
 get "/" do
-  otherMes = "The frontend page is working"
+  otherMes = "The frontend page is working linkit"
 	erb :show, :locals => {otherMessage: otherMes}
 end
 

@@ -6,7 +6,7 @@ Continuous integration (CI) and continuous delivery (CD) are essential in the wo
 
 This CI/CD pipeline using AWS CodePipeline and EKS. The CI/CD pipeline will deploy a tier two Kubernetes service, after making a change to the GitHub repository a new image will be built and the deployment object will be patched rolling out a new version of the application in the Kubernetes cluster running on EKS.
 
-![pipeline.png|60%](pipeline.png)
+![pipeline.png|40%](pipeline.png)
 
 ## Deploying the pipeline
 

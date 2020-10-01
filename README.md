@@ -12,7 +12,7 @@ This CI/CD pipeline using AWS CodePipeline and EKS. The CI/CD pipeline will depl
 
 I assume you already have an EKS cluster up and running, so we will start by creating the IAM role in order to allow AWS CodeBuild to deploy a sample Kubernetes service using [IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html). 
 
-### Create the role: 
+### Creating the IAM role: 
 From the bastion host that allows you to kubectl against your EKS cluster, perform the commands below to create IAM role and policies for CodeBuild:
 ```shell
 ACCOUNT_ID= YOUR AWS ACCOUNT NUMBER
@@ -25,7 +25,7 @@ aws iam create-role --role-name EksWorkshopCodeBuildKubectlRole --assume-role-po
 aws iam put-role-policy --role-name EksWorkshopCodeBuildKubectlRole --policy-name eks-describe --policy-document file:///tmp/iam-role-policy
 ```
 
-### MODIFY AWS-AUTH CONFIGMAP:
+### Modifying the aws-auth ConfigMap:
 
 We need to add the role created in the previous step in order to allow CodeBuild to authenticate to the EKS cluster assuming the role.
 
@@ -36,11 +36,11 @@ kubectl get -n kube-system configmap/aws-auth -o yaml | awk "/mapRoles: \|/{prin
 
 kubectl patch configmap/aws-auth -n kube-system --patch "$(cat /tmp/aws-auth-patch.yml)"
 ```
-### CONFIGURE GITHUB ACCESS TOKEN
+### Configuring the github token
 
 In order for CodePipeline to receive callbacks from GitHub, we need to generate a personal access token on **Settings/Developer settings/Personal access tokens** since I'm not the owner of the organization, I used my public repository [tavaresrodrigo/cicd-eks-codepipeline](https://github.com/tavaresrodrigo/cicd-eks-codepipeline) to connect to CodePipeline.
 
-## DEPLOYING THE PIPELINE 
+## Deploying the Pipeline
 
 We could use Terraform which is a great tool that offers Super portability since by using the same tool you have a single language for that can be used to define infrastructure for Google cloud, AWS, OpenStack and many of the other cloud providers, however I decided to use CloudFormation since it offers better integration with the AWS Managed services and it's a service already provided without any cost and effort of implementation. 
 

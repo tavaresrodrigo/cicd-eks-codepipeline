@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
 
-Description: EKSWSV1
+Description: cicd-eks-codepipeline
 
 
 Parameters:
@@ -55,7 +55,7 @@ Parameters:
 
   KubectlRoleName:
     Type: String
-    Default: EksWorkshopCodeBuildKubectlRole
+    Default: EksCodeBuildKubectlRole
     Description: IAM role used by kubectl to interact with EKS cluster
     MinLength: 3
     MaxLength: 100

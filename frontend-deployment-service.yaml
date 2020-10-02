@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: tavaresrodrigo/ams-frontend 
+        image: CONTAINER_IMAGE
         ports:
         - name: http
           containerPort: 4567
